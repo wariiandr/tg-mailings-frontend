@@ -18,7 +18,7 @@ const props = defineProps({
 
 <style scoped lang="scss">
 .base-button {
-  display: inline-block;
+  display: block;
   background: #6d28d9;
   color: white;
   font-size: 14px;
