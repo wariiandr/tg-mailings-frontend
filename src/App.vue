@@ -1,11 +1,6 @@
 <template>
-  <groups />
+  <router-view/>
 </template>
-
-<script setup>
-
-import Groups from "@/components/Groups/Groups.vue";
-</script>
 
 <style lang="scss">
 html {

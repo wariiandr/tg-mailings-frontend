@@ -38,7 +38,7 @@
 <script setup>
 
 import BaseButton from "@/components/UI/BaseButton.vue";
-import api from "@/api/index";
+import api from "@/api";
 
 const props = defineProps({
   group: {
