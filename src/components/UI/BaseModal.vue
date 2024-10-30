@@ -36,24 +36,20 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import BaseButton from "@/components/UI/BaseButton.vue";
 
-const props = defineProps({
-  showModal: {
-    type: Boolean
-  },
-  title: {
-    type: String,
-    required: true
-  },
-  id: {
-    type: String,
-    required: true
-  },
-})
+interface Props {
+  showModal: boolean,
+  title: string,
+  id: string
+}
 
-const emit = defineEmits(['close-modal']);
+const props = defineProps<Props>();
+
+const emit = defineEmits<{
+  (event: 'close-modal'): void,
+}>();
 </script>
 
 <style  lang="scss" scoped>

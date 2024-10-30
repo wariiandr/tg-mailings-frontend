@@ -35,29 +35,32 @@
   </div>
 </template>
 
-<script setup>
-
+<script lang="ts" setup>
+import {Group} from "@/lib/Group";
 import BaseButton from "@/components/UI/BaseButton.vue";
 import api from "@/api";
 
-const props = defineProps({
-  group: {
-    type: Object,
-    required: true
-  },
-})
+interface Props {
+  group: Group,
+}
 
-const emit = defineEmits(['on-edit-group', 'update-group', 'open-mailing-modal']);
+const props = defineProps<Props>();
 
-async function parseAdmins() {
-  const { data } = await api.groups.parseGroupAdmins({
+const emit = defineEmits<{
+  (event: 'on-edit-group', value: Group): void,
+  (event: 'update-group', value: Group): void,
+  (event: 'open-mailing-modal', value: Group): void,
+}>();
+
+async function parseAdmins(): void {
+  const group: Group = await api.groups.parseGroupAdmins({
     groupId: props.group._id,
   });
 
-  emit('update-group', data);
+  emit('update-group', group);
 }
 
-async function startMailing() {
+async function startMailing(): void {
   emit('open-mailing-modal', props.group);
 }
 

@@ -38,7 +38,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 
 import GroupsItem from "@/components/Groups/GroupsItem.vue";
 import {onMounted, ref} from "vue";
@@ -46,40 +46,48 @@ import GroupsItemModal from "@/components/Groups/GroupsItemModal.vue";
 import api from '@/api';
 import BaseButton from "@/components/UI/BaseButton.vue";
 import GroupsItemStartMailingModal from "@/components/Groups/GroupsItemStartMailingModal.vue";
+import {Group} from "@/lib/Group";
+import {Ref} from "vue";
 
-let groups = ref([]);
-const newGroup = {
+let groups = ref<Group[]>([]);
+const newGroup: Group = {
+  _id: '',
   name: '',
   link: '',
   description: '',
   admins: [],
 }
 
+let isEditingModalOpened = ref<boolean>(false);
+let editedGroup: Ref<Group> = ref({
+  _id: '1', // Инициализируем корректно
+  name: '',
+  link: 'example.com',
+  description: 'A group',
+  admins: [],
+});
 
-let isEditingModalOpened = ref(false);
-let editedGroup = ref({});
-
-function openEditingModal(group) {
+function openEditingModal(group: Group): void {
   isEditingModalOpened.value = true;
   editedGroup.value = group;
 }
 
-function updateGroup(group) {
-  const groupIdx = groups.value.findIndex(g => g._id === group._id);
+function updateGroup(group: Group): void {
+  const groupIdx: number = groups.value.findIndex(g => g._id === group._id);
 
   if (groupIdx !== -1) {
     groups.value[groupIdx] = group;
   }
 }
 
-function addGroup(group) {
+function addGroup(group: Group): void {
   groups.value.push(group);
 }
 
 
-const isMailingModalOpened = ref(false);
+const isMailingModalOpened = ref<boolean>(false);
 
-function openMailingModal(group) {
+function openMailingModal(group: Group): void {
   isMailingModalOpened.value = true;
   editedGroup.value = group;
 }
@@ -88,8 +96,7 @@ function openMailingModal(group) {
 onMounted(async () => {
   editedGroup.value = { ...newGroup };
 
-  const { data } = await api.groups.getAllGroups();
-  groups.value = data;
+  groups.value = await api.groups.getAllGroups();
 })
 </script>
 

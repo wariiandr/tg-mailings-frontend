@@ -1,18 +1,19 @@
 <template>
   <button
     class="base-button"
-    :class="{ icon }"
-    :style="{
-      margin: margin
-    }">
+    :class="[ color, icon && 'icon' ]">
     <slot></slot>
   </button>
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  margin: String,
-  icon: Boolean,
+interface Props {
+  color?: 'primary' | 'error',
+  icon?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  color: 'primary',
 })
 </script>
 
@@ -42,6 +43,10 @@ const props = defineProps({
   &.icon {
     background: none;
     padding: 4px 4px;
+  }
+
+  &.error {
+    background: #F84B4B;
   }
 }
 </style>

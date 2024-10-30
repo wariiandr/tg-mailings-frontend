@@ -22,27 +22,29 @@
   </base-modal>
 </template>
 
-<script setup>
-
+<script lang="ts" setup>
 import BaseModal from "@/components/UI/BaseModal.vue";
 import BaseInput from "@/components/UI/BaseInput.vue";
 import api from "@/api";
 import BaseButton from "@/components/UI/BaseButton.vue";
 import {ref} from "vue";
+import {Group} from "@/lib/Group";
 
-const props = defineProps({
-  showModal: {
-    type: Boolean
-  },
-  group: Object,
-})
+interface Props {
+  showModal: boolean,
+  group: Group,
+}
 
-const emit = defineEmits(['close-modal', 'update-group']);
+const props = defineProps<Props>();
+
+const emit = defineEmits<{
+  (event: 'close-modal'): void,
+}>();
 
 let message = ref('');
 
-async function startMailing() {
-  const { data } = await api.groups.startMailing({
+async function startMailing(): Promise<void> {
+  await api.groups.startMailing({
     groupId: props.group._id,
     message: message.value,
   });

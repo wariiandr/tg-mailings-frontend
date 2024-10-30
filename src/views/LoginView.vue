@@ -27,17 +27,17 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 
 import BaseInput from "@/components/UI/BaseInput.vue";
 import {ref} from "vue";
 import BaseButton from "@/components/UI/BaseButton.vue";
 import api from '@/api';
 
-const userName = ref('');
-const password = ref('');
+const userName = ref<string>('');
+const password = ref<string>('');
 
-async function login() {
+async function login(): Promise<void> {
   await api.auth.login({
     userName: userName.value,
     password: password.value,

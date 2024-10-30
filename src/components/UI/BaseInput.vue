@@ -1,7 +1,6 @@
 <template>
   <div
-    class="base-input"
-    :style="{margin: margin}">
+    class="base-input">
     <label
       v-if="label"
       class="label">
@@ -24,36 +23,32 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  modelValue: {
-    type: [String, Number],
-    default: ''
-  },
-  type: {
-    type: String,
-    default: 'text'
-  },
-  label: {
-    type: String,
-  },
-  error: {
-    type: String,
-  },
-  margin: {
-    type: String,
-  },
+<script lang="ts" setup>
+interface Props {
+  modelValue?: string | number,
+  type?: string,
+  label?: string,
+  error?: string,
+}
+const props = withDefaults(defineProps<Props>(), {
+  type: 'text',
 })
 
-const emit = defineEmits(['update:modelValue', 'on-change', 'on-input']);
+const emit = defineEmits<{
+  (event: 'update:modelValue', value: string): void;
+  (event: 'on-change', value: string): void;
+  (event: 'on-input', value: string): void;
+}>()
 
-function onChange(e) {
-  emit('on-change', e.target.value);
+function onChange(e: Event) {
+  const target = e.target as HTMLInputElement;
+  emit('on-change', target.value);
 }
 
-function onInput(e) {
-  emit('update:modelValue', e.target.value);
-  emit('on-input', e.target.value);
+function onInput(e: Event) {
+  const target = e.target as HTMLInputElement;
+  emit('update:modelValue', target.value);
+  emit('on-input', target.value);
 }
 </script>
 
@@ -79,7 +74,7 @@ function onInput(e) {
     font-family: "Montserrat", sans-serif;
     border-radius: 10px;
     padding: 8px 10px;
-    border: 2px solid #b7bac1;
+    border: 1px solid #b7bac1;
     background: #0c0c0c;
     font-weight: 500;
     font-size: 14px;
@@ -90,11 +85,11 @@ function onInput(e) {
 
     &:hover, &:focus {
       outline: none;
-      border: 2px solid #581c87;
+      border: 1px solid #581c87;
     }
 
     &.error {
-      border: 2px solid #F84B4B;
+      border: 1px solid #F84B4B;
     }
   }
 }

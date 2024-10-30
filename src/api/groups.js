@@ -1,21 +1,24 @@
-export default function(instance) {
+export default function (instance) {
     return {
-        getAllGroups() {
-            return instance.get('/groups');
+        async getAllGroups() {
+            const { data } = await instance.get('/groups');
+            return data;
         },
-        postGroup(payload) {
-            return instance.post('/groups', payload);
+        async postGroup(payload) {
+            const { data } = await instance.post('/groups', payload);
+            return data;
         },
-        putGroup(payload) {
-            return instance.put('/groups', payload);
+        async putGroup(payload) {
+            const { data } = await instance.put('/groups', payload);
+            return data;
         },
-
-        parseGroupAdmins(payload) {
-            console.log(payload)
-            return instance.post('/groups/parse_admins', payload);
+        async parseGroupAdmins(payload) {
+            const { data } = await instance.post('/groups/parse_admins', payload);
+            return data;
         },
-        startMailing(payload) {
-            return instance.post('/groups/start_mailing', payload);
+        async startMailing(payload) {
+            const { data } = await instance.post('/groups/start_mailing', payload);
         },
-    }
+    };
 }
+//# sourceMappingURL=groups.js.map

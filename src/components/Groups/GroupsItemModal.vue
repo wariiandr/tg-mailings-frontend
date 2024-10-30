@@ -2,7 +2,7 @@
   <base-modal
     :showModal="showModal"
     id="groupModal"
-    title="Редактирование группы"
+    :title="editedGroup._id ? 'Редактирование группы' : 'Создание группы'"
     @close-modal="emit('close-modal')">
     <template #body>
       <div class="group-modal">
@@ -59,32 +59,37 @@
   </base-modal>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 
 import BaseModal from "@/components/UI/BaseModal.vue";
 import BaseInput from "@/components/UI/BaseInput.vue";
 import api from "@/api";
 import BaseButton from "@/components/UI/BaseButton.vue";
+import {Group} from "@/lib/Group";
 
-const props = defineProps({
-  showModal: {
-    type: Boolean
-  },
-  editedGroup: Object,
-})
+interface Props {
+  showModal: boolean,
+  editedGroup: Group,
+}
 
-const emit = defineEmits(['close-modal', 'update-group']);
+const props = defineProps<Props>();
 
-async function createGroup() {
-  const { data } = await api.groups.postGroup({ ...props.editedGroup });
+const emit = defineEmits<{
+  (event: 'close-modal'): void,
+  (event: 'add-group', value: Group): void,
+  (event: 'update-group', value: Group): void,
+}>();
+
+async function createGroup(): Promise<void> {
+  const data: Group = await api.groups.postGroup({ ...props.editedGroup });
 
   emit('add-group', data);
   emit('close-modal');
 }
 
-async function editGroup() {
+async function editGroup(): Promise<void> {
   if (props.editedGroup._id) {
-    const { data } = await api.groups.putGroup({ ...props.editedGroup });
+    const data: Group = await api.groups.putGroup({ ...props.editedGroup });
 
     emit('update-group', data);
   }
