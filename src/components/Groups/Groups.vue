@@ -44,7 +44,7 @@ import GroupsItem from "@/components/Groups/GroupsItem.vue";
 import {onMounted, ref} from "vue";
 import GroupsItemModal from "@/components/Groups/GroupsItemModal.vue";
 import api from '@/api';
-import BaseButton from "@/components/UI/BaseButton.vue";
+import BaseButton from "@/components/UI/BaseButton/BaseButton.vue";
 import GroupsItemStartMailingModal from "@/components/Groups/GroupsItemStartMailingModal.vue";
 import {Group} from "@/lib/Group";
 import {Ref} from "vue";

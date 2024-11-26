@@ -29,9 +29,9 @@
 
 <script lang="ts" setup>
 
-import BaseInput from "@/components/UI/BaseInput.vue";
+import BaseInput from "@/components/UI/BaseInput/BaseInput.vue";
 import {ref} from "vue";
-import BaseButton from "@/components/UI/BaseButton.vue";
+import BaseButton from "@/components/UI/BaseButton/BaseButton.vue";
 import api from '@/api';
 
 const userName = ref<string>('');

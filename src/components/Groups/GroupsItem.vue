@@ -37,7 +37,7 @@
 
 <script lang="ts" setup>
 import {Group} from "@/lib/Group";
-import BaseButton from "@/components/UI/BaseButton.vue";
+import BaseButton from "@/components/UI/BaseButton/BaseButton.vue";
 import api from "@/api";
 
 interface Props {

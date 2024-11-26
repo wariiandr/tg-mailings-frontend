@@ -61,10 +61,10 @@
 
 <script lang="ts" setup>
 
-import BaseModal from "@/components/UI/BaseModal.vue";
-import BaseInput from "@/components/UI/BaseInput.vue";
+import BaseModal from "@/components/UI/BaseModal/BaseModal.vue";
+import BaseInput from "@/components/UI/BaseInput/BaseInput.vue";
 import api from "@/api";
-import BaseButton from "@/components/UI/BaseButton.vue";
+import BaseButton from "@/components/UI/BaseButton/BaseButton.vue";
 import {Group} from "@/lib/Group";
 
 interface Props {

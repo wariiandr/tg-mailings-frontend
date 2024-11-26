@@ -3,21 +3,22 @@
     class="base-input">
     <label
       v-if="label"
-      class="label">
+      class="base-input__label">
       {{ label }}
     </label>
 
     <input
+      class="base-input__input"
       :value="modelValue"
       @input="onInput"
       @change="onChange"
       :type="type"
-      :class="error"
+      :class="{ error }"
     >
 
     <span
       v-if="error"
-      class="error">
+      class="base-input__error">
       {{ error }}
     </span>
   </div>
@@ -58,18 +59,18 @@ function onInput(e: Event) {
   display: flex;
   flex-direction: column;
 
-  .label, .error {
+  &__label, &__error {
     display: inline-block;
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 4px;
   }
 
-  .error {
+  &__error {
     color: #F84B4B;
   }
 
-  input {
+  &__input {
     color: white;
     font-family: "Montserrat", sans-serif;
     border-radius: 10px;

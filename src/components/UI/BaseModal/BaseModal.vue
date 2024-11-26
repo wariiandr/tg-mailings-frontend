@@ -15,7 +15,7 @@
           <base-button
             icon
             @click="emit('close-modal')">
-            <img src="@/assets/icons/cross.svg" alt="cross">
+            <img src="../../../assets/icons/cross.svg" alt="cross">
           </base-button>
         </div>
 
@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-import BaseButton from "@/components/UI/BaseButton.vue";
+import BaseButton from "@/components/UI/BaseButton/BaseButton.vue";
 
 interface Props {
   showModal: boolean,
